@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/TimothyYe/godns"
+	"github.com/jmbayu/godns"
 )
 
 func TestResponseToJSON(t *testing.T) {

@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/TimothyYe/godns"
+	"github.com/jmbayu/godns"
 )
 
 // Handler struct definition

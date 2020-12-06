@@ -13,16 +13,16 @@
 [4]: https://microbadger.com/images/timothyye/godns
 [9]: https://img.shields.io/badge/license-Apache-blue.svg
 [10]: LICENSE
-[11]: https://goreportcard.com/badge/github.com/timothyye/godns
-[12]: https://goreportcard.com/report/github.com/timothyye/godns
-[13]: https://godoc.org/github.com/TimothyYe/godns?status.svg
-[14]: https://godoc.org/github.com/TimothyYe/godns
+[11]: https://goreportcard.com/badge/github.com/jmbayu/godns
+[12]: https://goreportcard.com/report/github.com/jmbayu/godns
+[13]: https://godoc.org/github.com/jmbayu/godns?status.svg
+[14]: https://godoc.org/github.com/jmbayu/godns
 [15]: https://img.shields.io/badge/cover.run-88.2%25-green.svg
-[16]: https://cover.run/go/github.com/timothyye/godns
+[16]: https://cover.run/go/github.com/jmbayu/godns
 
-GoDNS is a dynamic DNS (DDNS) client tool, it is based on my early open source project: [DynDNS](https://github.com/TimothyYe/DynDNS). 
+GoDNS is a dynamic DNS (DDNS) client tool, it is based on my early open source project: [DynDNS](https://github.com/jmbayu/DynDNS). 
 
-Now I rewrite [DynDNS](https://github.com/TimothyYe/DynDNS) by Golang and call it [GoDNS](https://github.com/TimothyYe/godns).
+Now I rewrite [DynDNS](https://github.com/jmbayu/DynDNS) by Golang and call it [GoDNS](https://github.com/jmbayu/godns).
 
 ## Supported DNS Providers
 
@@ -68,7 +68,7 @@ And the binary can run well on routers.
 * Get source code from Github:
 
 ```bash
-git clone https://github.com/timothyye/godns.git
+git clone https://github.com/jmbayu/godns.git
 ```
 
 * Go into the godns directory, get related library and then build it:
@@ -81,7 +81,7 @@ go build
 
 ### Download from releases
 
-Download compiled binaries from [releases](https://github.com/TimothyYe/godns/releases)
+Download compiled binaries from [releases](https://github.com/jmbayu/godns/releases)
 
 ## Get help
 
@@ -95,7 +95,7 @@ Usage of ./godns:
 
 ## Config it
 
-* Get [config_sample.json](https://github.com/timothyye/godns/blob/master/config_sample.json) from Github.
+* Get [config_sample.json](https://github.com/jmbayu/godns/blob/master/config_sample.json) from Github.
 * Rename it to **config.json**.
 * Configure your provider, domain/subdomain info, username and password, etc.
 * Configure the SMTP options if you want, a mail notification will sent to your mailbox once the IP is changed.
@@ -374,11 +374,11 @@ For HE, email is not needed, just fill DDNS key to password, and config all the 
 
 Add a new "A record", make sure that "Enable entry for dynamic dns" is checked:
 
-<img src="https://github.com/TimothyYe/godns/blob/master/snapshots/he1.png?raw=true" width="640" />
+<img src="https://github.com/jmbayu/godns/blob/master/snapshots/he1.png?raw=true" width="640" />
 
 Fill your own DDNS key or generate a random DDNS key for this new created "A record":
 
-<img src="https://github.com/TimothyYe/godns/blob/master/snapshots/he2.png?raw=true" width="640" />
+<img src="https://github.com/jmbayu/godns/blob/master/snapshots/he2.png?raw=true" width="640" />
 
 Remember the DDNS key and fill it as password to the config.json.
 
@@ -415,7 +415,7 @@ Update config file and provide your SMTP options, a notification mail will be se
 
 Notification mail example:  
 
-<img src="https://github.com/TimothyYe/godns/blob/master/snapshots/mail.png?raw=true" />  
+<img src="https://github.com/jmbayu/godns/blob/master/snapshots/mail.png?raw=true" />  
 
 ### Telegram notification support
 
@@ -494,7 +494,7 @@ sudo systemctl start godns
 
 Now godns supports to run in docker.
 
-* Get [config_sample.json](https://github.com/timothyye/godns/blob/master/config_sample.json) from Github.
+* Get [config_sample.json](https://github.com/jmbayu/godns/blob/master/config_sample.json) from Github.
 * Rename it to **config.json**.
 * Run GoDNS with docker:
 

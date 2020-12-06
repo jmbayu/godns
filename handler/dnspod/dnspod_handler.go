@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/TimothyYe/godns"
+	"github.com/jmbayu/godns"
 	"github.com/bitly/go-simplejson"
 )
 

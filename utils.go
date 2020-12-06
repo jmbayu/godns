@@ -2,6 +2,7 @@ package godns
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -11,10 +12,13 @@ import (
 	"net"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
+	"time"
 
-	dnsResolver "github.com/TimothyYe/godns/resolver"
+	dnsResolver "github.com/jmbayu/godns/resolver"
 
+	influxdb2 "github.com/influxdata/influxdb-client-go"
 	"github.com/miekg/dns"
 	"golang.org/x/net/proxy"
 	"gopkg.in/gomail.v2"
@@ -32,7 +36,7 @@ var (
  ╚═════╝  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 GoDNS V%s
-https://github.com/TimothyYe/godns
+https://github.com/jmbayu/godns
 
 `
 )
@@ -326,6 +330,42 @@ func SendMailNotify(configuration *Settings, domain, currentIP string) error {
 	return nil
 }
 
+// SaveToInfluxDB logs to influx  if IP is changed
+func SaveToInfluxDB(configuration *Settings, domain, currentIP string) error {
+	if !configuration.Notify.Influx.Enabled {
+		return nil
+	}
+	log.Print("Sending notification to:", configuration.Notify.Influx.SendTo)
+	influxPort := strconv.Itoa(configuration.Notify.Influx.INFLUXPort)
+
+	sURL := configuration.Notify.Influx.INFLUXServer + ":" + influxPort
+	// log.Println(sURL)
+
+	client := influxdb2.NewClient(sURL, "my-token")
+	writeApi := client.WriteApiBlocking("my-org", configuration.Notify.Influx.SendTo)
+	s := strings.Split(currentIP, ".")
+	i0, err := strconv.Atoi(s[0])
+	i1, err := strconv.Atoi(s[1])
+	i2, err := strconv.Atoi(s[2])
+	i3, err := strconv.Atoi(s[3])
+
+	if err == nil {
+		// create point using fluent style
+		p := influxdb2.NewPointWithMeasurement("inc").
+			//AddTag("unit", "temperature").
+			AddTag("ip", currentIP).
+			AddField("ip", currentIP).
+			AddField("b1", i0).
+			AddField("b2", i1).
+			AddField("b3", i2).
+			AddField("b4", i3).
+			SetTime(time.Now())
+		writeApi.WritePoint(context.Background(), p)
+		// log.Println("---")
+	}
+	return nil
+}
+
 // SendSlack sends slack if IP is changed
 func SendSlackNotify(configuration *Settings, domain, currentIP string) error {
 	if !configuration.Notify.Slack.Enabled {
@@ -402,6 +442,10 @@ func SendNotify(configuration *Settings, domain, currentIP string) error {
 	err = SendSlackNotify(configuration, domain, currentIP)
 	if err != nil {
 		log.Println("Send slack notification with error:", err.Error())
+	}
+	err = SaveToInfluxDB(configuration, domain, currentIP)
+	if err != nil {
+		log.Println("Send email notification with error:", err.Error())
 	}
 	return nil
 }

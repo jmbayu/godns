@@ -15,8 +15,8 @@ type Domain struct {
 // Notify struct for slack notification
 type SlackNotify struct {
 	Enabled     bool   `json:"enabled"`
-	BotApiToken   string `json:"bot_api_token"`
-	Channel      string `json:"channel"`
+	BotApiToken string `json:"bot_api_token"`
+	Channel     string `json:"channel"`
 	MsgTemplate string `json:"message_template"`
 	UseProxy    bool   `json:"use_proxy"`
 }
@@ -40,11 +40,22 @@ type MailNotify struct {
 	SendTo       string `json:"send_to"`
 }
 
+// InfluxNotify Notify struct for Influx storage
+type InfluxNotify struct {
+	Enabled        bool   `json:"enabled"`
+	INFLUXServer   string `json:"influx_server"`
+	INFLUXUsername string `json:"influx_username"`
+	INFLUXPassword string `json:"influx_password"`
+	INFLUXPort     int    `json:"influx_port"`
+	SendTo         string `json:"send_to"`
+}
+
 // Notify struct
 type Notify struct {
 	Telegram TelegramNotify `json:"telegram"`
 	Mail     MailNotify     `json:"mail"`
-	Slack	 SlackNotify	`json:"slack"`
+	Slack    SlackNotify    `json:"slack"`
+	Influx   InfluxNotify   `json:"influx"`
 }
 
 // Settings struct

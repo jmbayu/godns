@@ -7,14 +7,14 @@ import (
 
 	"log"
 
-	"github.com/TimothyYe/godns"
-	"github.com/TimothyYe/godns/handler"
+	"github.com/jmbayu/godns"
+	"github.com/jmbayu/godns/handler"
 	"github.com/fatih/color"
 )
 
 var (
 	configuration godns.Settings
-	optConf       = flag.String("c", "./config.json", "Specify a config file")
+	optConf       = flag.String("c", "config.json", "Specify a config file")
 	optHelp       = flag.Bool("h", false, "Show help")
 
 	// Version is current version of GoDNS

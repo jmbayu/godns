@@ -6,7 +6,7 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/TimothyYe/godns"
+	"github.com/jmbayu/godns"
 )
 
 // Handler struct
